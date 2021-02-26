@@ -68,14 +68,14 @@ func adddetails()
             print("""
                 \nSelect Account Type\n
                 1.Savings:
-                    Featues: -> Basic Account with minimum Balalce of 1000 Rupees.
+                    Featues: -> Basic Account with minimum Balalce of 0 Rupees.
                              -> Maximum withdrawl and deposit limit of 100000 Rupees.\n
                 2.Savings Pro Account:
                     Featues: -> Pro Account with minimum Balalce of 2000 Rupees.
                              -> Maximum withdrawl and deposit limit of 200000 Rupees.\n
                 3.Salary Account:
                     Features: -> For Salaried people no minimum balance
-                              -> Maximum withdrawl and deposit limit of 100000 Rupees.\n
+                              -> Maximum withdrawl and deposit limit of 150000 Rupees.\n
                 Reply with 1 or 2 or 3 only.\n
                 """)
             let account = Int(readLine()!) ?? 0

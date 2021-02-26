@@ -249,6 +249,8 @@ class Customer
         switch choice{
         
             case 1:
+                print("\nPlease enter Electricity Bill Id")
+                _ = Int(readLine()!)!
                 print("\nYour Electricity Bill is : 250")
                 let account = getAccount(type:from)
                 if account != nil {
@@ -262,6 +264,8 @@ class Customer
                     return false
                 }
             case 2:
+                print("\nPlease enter Broadband Bill Id")
+                _ = Int(readLine()!)!
                 print("\nYour BroadBand Bill is : 599 ")
                 let account = getAccount(type:from)
                 if account != nil {
@@ -275,6 +279,8 @@ class Customer
                     return false
                 }
             case 3:
+                print("\nPlease enter Pospaid Bill Id")
+                _ = Int(readLine()!)!
                 print("\nYour Postpaid Bill is : 499 ")
                 let account = getAccount(type:from)
                 if account != nil {
@@ -301,7 +307,8 @@ class Customer
                     return false
                 }
             case 5:
-                print("\nYour DTH Bill is : 450 ")
+                print("\nPlease enter DTH Bill Id")
+                _ = Int(readLine()!)!
                 let account = getAccount(type:from)
                 if account != nil {
                     if account!.withDraw(amount:450.0) {
