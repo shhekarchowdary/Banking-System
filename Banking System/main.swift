@@ -48,7 +48,7 @@ func adddetails()
     print("Enter the address")
     let address = readLine()!
     
-    print("Enter the City")
+    print("Enter the City Name")
     let city = readLine()!
     
     print("Enter the Pan Number")
