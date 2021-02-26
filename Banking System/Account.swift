@@ -22,6 +22,7 @@ class Account
             return true
         }
         else{
+            print("Transaction UnSuccessfull")
             print("Your Account type can only deposit maximum of \(self.maxDeposit)\n")
             return false
         }
@@ -34,10 +35,12 @@ class Account
                 print("Current Balance:\(self.currentBalance)")
                 return true
             }else{
+                print("Transaction UnSuccessfull")
                 print("Your Account type can only withdraw maximum of \(self.maxWithdrawal)\n")
                 return false
             }
         }else{
+            print("Transaction UnSuccessfull")
             print("Balance Insufficient \(self.currentBalance)\n")
             return false
         }
@@ -88,13 +91,13 @@ class SavingsProAccount: Account
 
 class SalaryAccount: Account
 {
-    var salary: Double
+    var empId: String
     var companyName: String
     
-    init (accountNumber:String, initialDeposit:Double, companyName:String, salary:Double)
+    init (accountNumber:String, initialDeposit:Double, companyName:String, empId:String)
     {
         self.companyName = companyName
-        self.salary = salary
+        self.empId = empId
 
         super.init(accountNumber:accountNumber,initialDeposit:initialDeposit)
         self.minBalance = 0.0

@@ -22,7 +22,7 @@ func getCustomer(crn:String) -> Customer? {
 
 func mainMenu(cus:Customer){
     
-    print("\nPlease Select from below to continue\n 1:Create another Account\n 2:Banking\n 3:Edit your Details\n 4:Logout\nSelect 1 or 2 or 3 or 4 only")
+    print("\nPlease Select from below to continue\n 1:Create another Account type for same User\n 2:Banking\n 3:Edit your Details\n 4:Logout\nSelect 1 or 2 or 3 or 4 only")
     let choice = Int(readLine()!) ?? 0
     switch choice{
         case 1:
@@ -32,14 +32,14 @@ func mainMenu(cus:Customer){
                     print("""
                         \nSelect Account Type
                         1.Savings:
-                            Featues: -> Basic Account with minimum Balalce of 1000 Rupees.
+                            Featues: -> Basic Account with no minimum Balalce.
                                      -> Maximum withdrawl and deposit limit of 100000 Rupees.\n
                         2.Savings Pro Account:
                             Featues: -> Pro Account with minimum Balalce of 2000 Rupees.
                                      -> Maximum withdrawl and deposit limit of 200000 Rupees.\n
                         3.Salary Account:
                             Features: -> For Salaried people no minimum balance
-                                      -> Maximum withdrawl and deposit limit of 100000 Rupees.\n
+                                      -> Maximum withdrawl and deposit limit of 150000 Rupees.\n
                         Reply with 1 or 2 or 3 only.
                         """)
                     let account = Int(readLine()!) ?? 0
@@ -51,6 +51,7 @@ func mainMenu(cus:Customer){
                         rep = 1
                     }
                 }while rep == 1
+            cus.getData()
             mainMenu(cus: cus)
         case 2:
             banking(cus: cus)
@@ -178,11 +179,16 @@ func banking(cus:Customer){
                 let fromAccount = Int(readLine()!) ?? 0
                 print("Select To Account")
                 let toAccount = Int(readLine()!) ?? 0
-                print("Enter Amount")
-                let amount = Double(readLine()!) ?? 0.0
-                if cus.transfermoney(from:fromAccount,to:toAccount,amount:amount) == false{
-                    print("Money Transfer Unsuccessfull")
+                if fromAccount == toAccount{
+                    print("Enter Amount")
+                    let amount = Double(readLine()!) ?? 0.0
+                    if cus.transfermoney(from:fromAccount,to:toAccount,amount:amount) == false{
+                        print("Money Transfer Unsuccessfull")
+                    }
+                }else {
+                    print("**The Sender and Beneficiary Accounts are same**")
                 }
+                
             }
         case 5:
             if cus.getUserAccounts(){
@@ -217,15 +223,14 @@ func banking(cus:Customer){
         default:
             print("**Please enter correct Choice**")
             banking(cus:cus)
-      
     }
     print("\nDo you want to do more transactions\n 1.Yes\n 2.No\nReply with 1 or 2")
     let rep = Int(readLine()!) ?? 0
     if rep == 1 {
         banking(cus: cus)
+    }else{
+        mainMenu(cus: cus)
     }
-    
-    mainMenu(cus: cus)
 
 }
 

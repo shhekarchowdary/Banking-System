@@ -57,7 +57,8 @@ class Customer
                         print("Savings Account Creation Successful\nCurrent Balance: \(self.account1?.currentBalance ?? 0.0)\n")
                         return true
                     }else{
-                        print("Minimum Balance for Savings Account is 0")
+                        print("Account Creation Unsuccessfull")
+                        print("Amount must be not Negative")
                         return false
                     }
                 case 2:
@@ -66,6 +67,7 @@ class Customer
                         print("Savings Pro Account Creation Successful\nCurrent Balance: \(self.account2?.currentBalance ?? 0.0)\n")
                         return true
                     }else{
+                        print("Account Creation Unsuccessfull")
                         print("Minimum Balance for Savings Account Pro is 2000")
                         return false
                     }
@@ -73,13 +75,14 @@ class Customer
                     if initialamount >= 0{
                         print("Enter company name:")
                         let companyName = readLine()!
-                        print("Enter Salary:")
-                        let salary = Double(readLine()!)!
-                        self.account3 = SalaryAccount(accountNumber:accountNumber, initialDeposit: initialamount, companyName: companyName, salary: salary)
+                        print("Enter Employee Id:")
+                        let empId = readLine()!
+                        self.account3 = SalaryAccount(accountNumber:accountNumber, initialDeposit: initialamount, companyName: companyName, empId: empId)
                         print("Salary Account Creation Successful\nCurrent Balance: \(self.account3?.currentBalance ?? 0.0)\n")
                         return true
                     }else{
-                        print("Minimum Balance for Salary Account is 0")
+                        print("Account Creation Unsuccessfull")
+                        print("Amount must be not Negative")
                         return false
                     }
                 default:
@@ -111,7 +114,7 @@ class Customer
             print("Account No: \(account3!.accountNo)")
             print("Type: \(self.account3!.type)")
             print("Company Name: \(self.account3!.companyName)")
-            print("Salary: \(self.account3!.salary)")
+            print("Salary: \(self.account3!.empId)")
         }
     }
     
@@ -213,8 +216,6 @@ class Customer
     func transfermoney(from:Int,to:Int,amount:Double)->Bool
     {
         var check = true
-        if from != to
-        {
             let wAccount = getAccount(type:from)
             let dAccount = getAccount(type:to)
             if wAccount != nil
@@ -242,12 +243,7 @@ class Customer
                 print("Sender Account Doesn't Exists")
             }
             
-        }else {
-            check = false
-            print("**The Sender and Beneficiary Accounts are same**")
-        }
         return check
-        
     }
     
     func paybills(from:Int) -> Bool
@@ -393,7 +389,7 @@ class Customer
                     return false
                 }
             case 3:
-                print("\nSelect Event: \n1.Live Concert \n2.Naari Naari Naduma Murari \n3.Aada Pori Eeda Poragadu")
+                print("\nSelect Event: \n1.Music Live Concert \n2.Naari Naari Naduma Murari \n3.Aada Pori Eeda Poragadu")
                 _ = Int(readLine()!) ?? 3
                 let randomInt = Int.random(in: 250..<700)
                 let fare = Double(randomInt)
