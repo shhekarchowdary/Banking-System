@@ -41,7 +41,7 @@ class Account
             }
         }else{
             print("Transaction UnSuccessfull")
-            print("Balance Insufficient \(self.currentBalance)\n")
+            print("Balance Insufficient, Current Balance: \(self.currentBalance)\n")
             return false
         }
     }

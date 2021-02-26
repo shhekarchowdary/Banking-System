@@ -114,7 +114,7 @@ class Customer
             print("Account No: \(account3!.accountNo)")
             print("Type: \(self.account3!.type)")
             print("Company Name: \(self.account3!.companyName)")
-            print("Salary: \(self.account3!.empId)")
+            print("Employee Id: \(self.account3!.empId)")
         }
     }
     
@@ -249,7 +249,7 @@ class Customer
     func paybills(from:Int) -> Bool
     {
         print("\nSelect:\n 1:Electricity Bill\n 2.BroadBand Bill \n 3.PostPaid Bill\n 4.Credit Bill\n 5.DTH Bill")
-        let choice = Int(readLine()!)!
+        let choice = Int(readLine()!) ?? 0
         switch choice{
         
             case 1:
@@ -258,83 +258,124 @@ class Customer
                 let randomInt = Int.random(in: 100..<1000)
                 let bill = Double(randomInt)
                 print("\nYour Electricity Bill is : \(bill)")
-                let account = getAccount(type:from)
-                if account != nil {
-                    if account!.withDraw(amount:bill) {
-                        print("Electricity Bill Payment Succesfull")
-                        return true
-                    }else {
+                print("\nDo You want to pay\n 1:Yes\n 2:No\nSelect 1 or 2")
+                let ans = Int(readLine()!) ?? 0
+                if ans == 1{
+                    let account = getAccount(type:from)
+                    if account != nil {
+                        if account!.withDraw(amount:bill) {
+                            print("Electricity Bill Payment Succesfull")
+                            return true
+                        }else {
+                            return false
+                        }
+                    }else{
                         return false
                     }
-                }else{
+                }else {
                     return false
                 }
+                
             case 2:
                 print("\nPlease enter Broadband Bill Id")
                 _ = readLine()!
                 let randomInt = Int.random(in: 500..<1000)
                 let bill = Double(randomInt)
                 print("\nYour BroadBand Bill is : \(bill) ")
-                let account = getAccount(type:from)
-                if account != nil {
-                    if account!.withDraw(amount:bill) {
-                        print("BroadBandBill Payment Succesfull")
-                        return true
-                    }else {
+                print("\nDo You want to pay\n 1:Yes\n 2:No\nSelect 1 or 2")
+                let ans = Int(readLine()!) ?? 0
+                if ans == 1{
+                    let account = getAccount(type:from)
+                    if account != nil {
+                        if account!.withDraw(amount:bill) {
+                            print("BroadBandBill Payment Succesfull")
+                            return true
+                        }else {
+                            return false
+                        }
+                    }else{
                         return false
                     }
-                }else{
+                }else {
                     return false
                 }
+                
             case 3:
                 print("\nPlease enter Pospaid Bill Id")
                 _ = readLine()!
                 let randomInt = Int.random(in: 500..<1000)
                 let bill = Double(randomInt)
                 print("\nYour Postpaid Bill is : \(bill)")
-                let account = getAccount(type:from)
-                if account != nil {
-                    if account!.withDraw(amount:bill) {
-                        print("BroadBandBill Payment Succesfull")
-                        return true
+                print("\nDo You want to pay\n 1:Yes\n 2:No\nSelect 1 or 2")
+                let ans = Int(readLine()!) ?? 0
+                if ans == 1{
+                    let account = getAccount(type:from)
+                    if account != nil {
+                        let account = getAccount(type:from)
+                        if account != nil {
+                            if account!.withDraw(amount:bill) {
+                                print("BroadBandBill Payment Succesfull")
+                                return true
+                            }else {
+                                return false
+                            }
+                        }else{
+                            return false
+                        }
                     }else {
                         return false
                     }
-                }else{
+                }else {
                     return false
                 }
+                
+                
             case 4:
                 let randomInt = Int.random(in: 0..<2000)
                 let bill = Double(randomInt)
                 print("\nYour Credit Bill is : \(bill) ")
-                let account = getAccount(type:from)
-                if account != nil {
-                    if account!.withDraw(amount:bill) {
-                        print("Credit Bill Payment Succesfull")
-                        return true
-                    }else {
+                print("\nDo You want to pay\n 1:Yes\n 2:No\nSelect 1 or 2")
+                let ans = Int(readLine()!) ?? 0
+                if ans == 1{
+                    let account = getAccount(type:from)
+                    if account != nil {
+                        if account!.withDraw(amount:bill) {
+                            print("Credit Bill Payment Succesfull")
+                            return true
+                        }else {
+                            return false
+                        }
+                    }else{
                         return false
                     }
                 }else{
                     return false
                 }
+                
             case 5:
                 print("\nPlease enter DTH Bill Id")
                 _ = readLine()!
                 let randomInt = Int.random(in: 250..<700)
                 let bill = Double(randomInt)
                 print("\nYour DTH Bill is : \(bill) ")
-                let account = getAccount(type:from)
-                if account != nil {
-                    if account!.withDraw(amount:450.0) {
-                        print("DTH Bill Payment Succesfull")
-                        return true
-                    }else {
+                print("\nDo You want to pay\n 1:Yes\n 2:No\nSelect 1 or 2")
+                let ans = Int(readLine()!) ?? 0
+                if ans == 1{
+                    let account = getAccount(type:from)
+                    if account != nil {
+                        if account!.withDraw(amount:450.0) {
+                            print("DTH Bill Payment Succesfull")
+                            return true
+                        }else {
+                            return false
+                        }
+                    }else{
                         return false
                     }
                 }else{
                     return false
                 }
+                
             default:
                 print("\nIncorrect Selection")
                 return false
@@ -352,18 +393,25 @@ class Customer
                 print("\nSelect Movie: \n1.Allari Alludu \n2.Dookudu \n3.Manmadhudu")
                 _ = Int(readLine()!) ?? 2
                 print("Your Ticket Fare is : 250 ")
-                print("Booking Ticket...")
-                let account = getAccount(type:from)
-                if account != nil {
-                    if account!.withDraw(amount:250.0) {
-                        print("Booking Succesfull \n Theatre: ComedyCellar\t\t\tSeat No: H5")
-                        return true
-                    }else {
+                print("\nDo You want to pay\n 1:Yes\n 2:No\nSelect 1 or 2")
+                let ans = Int(readLine()!) ?? 0
+                if ans == 1{
+                    print("Booking Ticket...")
+                    let account = getAccount(type:from)
+                    if account != nil {
+                        if account!.withDraw(amount:250.0) {
+                            print("Booking Succesfull \n Theatre: ComedyCellar\t\t\tSeat No: H5")
+                            return true
+                        }else {
+                            return false
+                        }
+                    }else{
                         return false
                     }
                 }else{
                     return false
                 }
+                
             case 2:
                 print("\nSelect Mode of Travel: \n1.Flight \n2.Bus \n3.Train")
                 _ = Int(readLine()!) ?? 2
@@ -376,36 +424,50 @@ class Customer
                 let randomInt = Int.random(in: 1000..<5000)
                 let fare = Double(randomInt)
                 print("Your Ticket Fare is : \(fare)")
-                print("Booking Ticket...")
-                let account = getAccount(type:from)
-                if account != nil {
-                    if account!.withDraw(amount:fare) {
-                        print("Booking Succesfull \n Booking ID: 8945679989")
-                        return true
-                    }else {
+                print("\nDo You want to pay\n 1:Yes\n 2:No\nSelect 1 or 2")
+                let ans = Int(readLine()!) ?? 0
+                if ans == 1{
+                    print("Booking Ticket...")
+                    let account = getAccount(type:from)
+                    if account != nil {
+                        if account!.withDraw(amount:fare) {
+                            print("Booking Succesfull \n Booking ID: 8945679989")
+                            return true
+                        }else {
+                            return false
+                        }
+                    }else{
                         return false
                     }
                 }else{
                     return false
                 }
+                
             case 3:
                 print("\nSelect Event: \n1.Music Live Concert \n2.Naari Naari Naduma Murari \n3.Aada Pori Eeda Poragadu")
                 _ = Int(readLine()!) ?? 3
                 let randomInt = Int.random(in: 250..<700)
                 let fare = Double(randomInt)
                 print("Your Ticket fare is : \(fare)")
-                print("Booking Ticket...")
-                let account = getAccount(type:from)
-                if account != nil {
-                    if account!.withDraw(amount:fare) {
-                        print("Booking Succesfull \n Booking Id:143")
-                        return true
-                    }else {
+                print("\nDo You want to pay\n 1:Yes\n 2:No\nSelect 1 or 2")
+                let ans = Int(readLine()!) ?? 0
+                if ans == 1{
+                    print("Booking Ticket...")
+                    let account = getAccount(type:from)
+                    if account != nil {
+                        if account!.withDraw(amount:fare) {
+                            print("Booking Succesfull \n Booking Id:143")
+                            return true
+                        }else {
+                            return false
+                        }
+                    }else{
                         return false
                     }
                 }else{
                     return false
                 }
+                
             case 4:
                 print("\nEnter City Name")
                 _ = readLine()!
@@ -419,13 +481,19 @@ class Customer
                 let dayFare = Double(randomInt)
                 let fare = days * dayFare
                 print("Your Booking Fare: \(fare)")
-                print("Booking Hotel.....")
-                let account = getAccount(type:from)
-                if account != nil {
-                    if account!.withDraw(amount:fare) {
-                        print("Booking Succesfull \n Booking Id:143")
-                        return true
-                    }else {
+                print("\nDo You want to pay\n 1:Yes\n 2:No\nSelect 1 or 2")
+                let ans = Int(readLine()!) ?? 0
+                if ans == 1{
+                    print("Booking Hotel.....")
+                    let account = getAccount(type:from)
+                    if account != nil {
+                        if account!.withDraw(amount:fare) {
+                            print("Booking Succesfull \n Booking Id:143")
+                            return true
+                        }else {
+                            return false
+                        }
+                    }else{
                         return false
                     }
                 }else{
@@ -436,6 +504,7 @@ class Customer
                 print("Incorrect Selection")
                 return false
         }
-    }
+        
+      }
     
-}
+    }

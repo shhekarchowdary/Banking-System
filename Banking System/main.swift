@@ -142,7 +142,7 @@ func adddetails()
 
 
 func banking(cus:Customer){
-   
+    var more = 1
     print("\nPlease Select from below Transactions:\n 1:Check Balance\n 2.Deposit \n 3.Withdraw \n 4.Transfer\n 5.Pay Bills\n 6.Bookings\n 7.Exit\n")
     let transaction = Int(readLine()!) ?? 0
     switch transaction{
@@ -179,7 +179,7 @@ func banking(cus:Customer){
                 let fromAccount = Int(readLine()!) ?? 0
                 print("Select To Account")
                 let toAccount = Int(readLine()!) ?? 0
-                if fromAccount == toAccount{
+                if fromAccount != toAccount{
                     print("Enter Amount")
                     let amount = Double(readLine()!) ?? 0.0
                     if cus.transfermoney(from:fromAccount,to:toAccount,amount:amount) == false{
@@ -219,15 +219,22 @@ func banking(cus:Customer){
                 }while rep == 1
             }
         case 7:
+            more = 2
             break
         default:
+            more = 2
             print("**Please enter correct Choice**")
             banking(cus:cus)
     }
-    print("\nDo you want to do more transactions\n 1.Yes\n 2.No\nReply with 1 or 2")
-    let rep = Int(readLine()!) ?? 0
-    if rep == 1 {
-        banking(cus: cus)
+    
+    if more != 2 {
+        print("\nDo you want to do more transactions\n 1.Yes\n 2.No\nReply with 1 or 2")
+        let repe = Int(readLine()!) ?? 0
+        if repe == 1 {
+            banking(cus: cus)
+        }else{
+            mainMenu(cus: cus)
+        }
     }else{
         mainMenu(cus: cus)
     }
