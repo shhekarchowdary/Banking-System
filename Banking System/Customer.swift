@@ -110,8 +110,9 @@ class Customer
         if self.account3 != nil {
             print("Account No: \(account3!.accountNo)")
             print("Type: \(self.account3!.type)")
+            print("Company Name: \(self.account3!.companyName)")
+            print("Salary: \(self.account3!.salary)")
         }
-        print("\n")
     }
     
     func getUserAccounts()->Bool{
@@ -215,26 +216,33 @@ class Customer
         if from != to
         {
             let wAccount = getAccount(type:from)
+            let dAccount = getAccount(type:to)
             if wAccount != nil
             {
-                if amount <= wAccount!.currentBalance{
-                    wAccount!.currentBalance -= amount
-                    print("Current Balance in From Account:\(wAccount!.currentBalance)\n")
-                    check = true
-                }else{
-                    print("Balance Insufficient in From Account \(wAccount!.currentBalance)\n")
-                    check = false
-                }
-            }
-            if check == true{
-                let dAccount = getAccount(type:to)
                 if dAccount != nil{
-                        dAccount!.currentBalance += amount
-                        print("Current Balance in to Account:\(dAccount!.currentBalance)\n")
+                    if amount <= wAccount!.currentBalance{
+                        wAccount!.currentBalance -= amount
+                        print("Current Balance in From Account:\(wAccount!.currentBalance)\n")
+                        check = true
+                    }else{
+                        print("Balance Insufficient in From Account \(wAccount!.currentBalance)\n")
+                        check = false
+                    }
+                    if check == true{
+                        let dAccount = getAccount(type:to)
+                        if dAccount != nil{
+                                dAccount!.currentBalance += amount
+                                print("Current Balance in to Account:\(dAccount!.currentBalance)\n")
+                        }
+                    }
+                }else{
+                    print("Beneficiary Account Doesn't Exists")
                 }
+            }else{
+                print("Sender Account Doesn't Exists")
             }
-        }
-        else {
+            
+        }else {
             check = false
             print("**The Sender and Beneficiary Accounts are same**")
         }
@@ -250,11 +258,13 @@ class Customer
         
             case 1:
                 print("\nPlease enter Electricity Bill Id")
-                _ = Int(readLine()!)!
-                print("\nYour Electricity Bill is : 250")
+                _ = readLine()!
+                let randomInt = Int.random(in: 100..<1000)
+                let bill = Double(randomInt)
+                print("\nYour Electricity Bill is : \(bill)")
                 let account = getAccount(type:from)
                 if account != nil {
-                    if account!.withDraw(amount:250.0) {
+                    if account!.withDraw(amount:bill) {
                         print("Electricity Bill Payment Succesfull")
                         return true
                     }else {
@@ -265,11 +275,13 @@ class Customer
                 }
             case 2:
                 print("\nPlease enter Broadband Bill Id")
-                _ = Int(readLine()!)!
-                print("\nYour BroadBand Bill is : 599 ")
+                _ = readLine()!
+                let randomInt = Int.random(in: 500..<1000)
+                let bill = Double(randomInt)
+                print("\nYour BroadBand Bill is : \(bill) ")
                 let account = getAccount(type:from)
                 if account != nil {
-                    if account!.withDraw(amount:599.0) {
+                    if account!.withDraw(amount:bill) {
                         print("BroadBandBill Payment Succesfull")
                         return true
                     }else {
@@ -280,11 +292,13 @@ class Customer
                 }
             case 3:
                 print("\nPlease enter Pospaid Bill Id")
-                _ = Int(readLine()!)!
-                print("\nYour Postpaid Bill is : 499 ")
+                _ = readLine()!
+                let randomInt = Int.random(in: 500..<1000)
+                let bill = Double(randomInt)
+                print("\nYour Postpaid Bill is : \(bill)")
                 let account = getAccount(type:from)
                 if account != nil {
-                    if account!.withDraw(amount:499.0) {
+                    if account!.withDraw(amount:bill) {
                         print("BroadBandBill Payment Succesfull")
                         return true
                     }else {
@@ -294,10 +308,12 @@ class Customer
                     return false
                 }
             case 4:
-                print("\nYour Credit Bill is : 1000 ")
+                let randomInt = Int.random(in: 0..<2000)
+                let bill = Double(randomInt)
+                print("\nYour Credit Bill is : \(bill) ")
                 let account = getAccount(type:from)
                 if account != nil {
-                    if account!.withDraw(amount:1000.0) {
+                    if account!.withDraw(amount:bill) {
                         print("Credit Bill Payment Succesfull")
                         return true
                     }else {
@@ -308,7 +324,10 @@ class Customer
                 }
             case 5:
                 print("\nPlease enter DTH Bill Id")
-                _ = Int(readLine()!)!
+                _ = readLine()!
+                let randomInt = Int.random(in: 250..<700)
+                let bill = Double(randomInt)
+                print("\nYour DTH Bill is : \(bill) ")
                 let account = getAccount(type:from)
                 if account != nil {
                     if account!.withDraw(amount:450.0) {
@@ -335,7 +354,7 @@ class Customer
         
             case 1:
                 print("\nSelect Movie: \n1.Allari Alludu \n2.Dookudu \n3.Manmadhudu")
-                _ = Int(readLine()!)!
+                _ = Int(readLine()!) ?? 2
                 print("Your Ticket Fare is : 250 ")
                 print("Booking Ticket...")
                 let account = getAccount(type:from)
@@ -351,18 +370,20 @@ class Customer
                 }
             case 2:
                 print("\nSelect Mode of Travel: \n1.Flight \n2.Bus \n3.Train")
-                _ = Int(readLine()!)!
+                _ = Int(readLine()!) ?? 2
                 print("Enter Source:")
                 _ = readLine()!
                 print("Enter Destination:")
                 _ = readLine()!
                 print("Enter Date of Travel")
                 _ = readLine()
-                print("Your Ticket Fare is : 2000")
+                let randomInt = Int.random(in: 1000..<5000)
+                let fare = Double(randomInt)
+                print("Your Ticket Fare is : \(fare)")
                 print("Booking Ticket...")
                 let account = getAccount(type:from)
                 if account != nil {
-                    if account!.withDraw(amount:2000.0) {
+                    if account!.withDraw(amount:fare) {
                         print("Booking Succesfull \n Booking ID: 8945679989")
                         return true
                     }else {
@@ -373,12 +394,14 @@ class Customer
                 }
             case 3:
                 print("\nSelect Event: \n1.Live Concert \n2.Naari Naari Naduma Murari \n3.Aada Pori Eeda Poragadu")
-                _ = Int(readLine()!)!
-                print("Your Ticket fare is : 500 ")
+                _ = Int(readLine()!) ?? 3
+                let randomInt = Int.random(in: 250..<700)
+                let fare = Double(randomInt)
+                print("Your Ticket fare is : \(fare)")
                 print("Booking Ticket...")
                 let account = getAccount(type:from)
                 if account != nil {
-                    if account!.withDraw(amount:500.0) {
+                    if account!.withDraw(amount:fare) {
                         print("Booking Succesfull \n Booking Id:143")
                         return true
                     }else {
@@ -391,12 +414,14 @@ class Customer
                 print("\nEnter City Name")
                 _ = readLine()!
                 print("Select Hotel: \n1.Novotel \n2.Taj \n3.ITC Kakatiya")
-                _ = Int(readLine()!)!
+                _ = Int(readLine()!) ?? 1
                 print("Enter Checkin Date")
                 _ = readLine()!
                 print("Number of Days")
                 let days = Double(readLine()!) ?? 1
-                let fare = days * 4500.0
+                let randomInt = Int.random(in: 3500..<4500)
+                let dayFare = Double(randomInt)
+                let fare = days * dayFare
                 print("Your Booking Fare: \(fare)")
                 print("Booking Hotel.....")
                 let account = getAccount(type:from)
