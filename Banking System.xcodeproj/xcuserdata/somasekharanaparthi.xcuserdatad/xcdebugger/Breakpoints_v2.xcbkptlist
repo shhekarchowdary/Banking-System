@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Bucket
+   uuid = "6612D2DD-D9C3-49FC-AE27-2D14E70F2022"
+   type = "1"
+   version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "1799C4D5-51DD-4AF1-860D-69864EDCAD98"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Banking System/Customer.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "138"
+            endingLineNumber = "138"
+            landmarkName = "getUserAccounts()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "1799C4D5-51DD-4AF1-860D-69864EDCAD98 - b6db47d9e6f090fc"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Banking_System.Customer.getAccount(type: Swift.Int) -&gt; Swift.Optional&lt;Banking_System.Account&gt;"
+                  moduleName = "Banking System"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/somasekharanaparthi/Downloads/MAD%203004/Banking%20System/Banking%20System/Customer.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "138"
+                  endingLineNumber = "138"
+                  offsetFromSymbolStart = "87">
+               </Location>
+               <Location
+                  uuid = "1799C4D5-51DD-4AF1-860D-69864EDCAD98 - b6db47d9e6f090fc"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Banking_System.Customer.getAccount(type: Swift.Int) -&gt; Swift.Optional&lt;Banking_System.Account&gt;"
+                  moduleName = "Banking System"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/somasekharanaparthi/Downloads/MAD%203004/Banking%20System/Banking%20System/Customer.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "138"
+                  endingLineNumber = "138"
+                  offsetFromSymbolStart = "267">
+               </Location>
+               <Location
+                  uuid = "1799C4D5-51DD-4AF1-860D-69864EDCAD98 - b6db47d9e6f090fc"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Banking_System.Customer.getAccount(type: Swift.Int) -&gt; Swift.Optional&lt;Banking_System.Account&gt;"
+                  moduleName = "Banking System"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/somasekharanaparthi/Downloads/MAD%203004/Banking%20System/Banking%20System/Customer.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "138"
+                  endingLineNumber = "138"
+                  offsetFromSymbolStart = "496">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
+</Bucket>
