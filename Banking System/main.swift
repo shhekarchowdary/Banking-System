@@ -11,9 +11,9 @@ var customers = [Customer]()
 var users = 1000
 var accountNos = 100000
 
-func getCustomer(crn:String) -> Customer? {
+func getCustomer(cin:String) -> Customer? {
     for i in customers{
-        if i.crn == crn {
+        if i.cin == cin {
             return i
         }
     }
@@ -26,13 +26,16 @@ func mainMenu(cus:Customer){
     let choice = Int(readLine()!) ?? 0
     switch choice{
         case 1:
-                var rep:Int
+            var rep:Int
+            if cus.getAccount(type: 1) != nil && cus.getAccount(type: 2) != nil && cus.getAccount(type: 3) != nil{
+                print("Customer already have all Account Types")
+            }else{
                 repeat{
                     rep = 0
                     print("""
-                        \nSelect Account Type
+                        \nSelect Account Type\n
                         1.Savings:
-                            Featues: -> Basic Account with no minimum Balalce.
+                            Featues: -> Basic Account with minimum Balalce of 0 Rupees.
                                      -> Maximum withdrawl and deposit limit of 100000 Rupees.\n
                         2.Savings Pro Account:
                             Featues: -> Pro Account with minimum Balalce of 2000 Rupees.
@@ -40,10 +43,10 @@ func mainMenu(cus:Customer){
                         3.Salary Account:
                             Features: -> For Salaried people no minimum balance
                                       -> Maximum withdrawl and deposit limit of 150000 Rupees.\n
-                        Reply with 1 or 2 or 3 only.
+                        Reply with 1 or 2 or 3 only.\n
                         """)
                     let account = Int(readLine()!) ?? 0
-                    print("\nEnter Initial Deposit Amount")
+                    print("Enter Initial Deposit Amount")
                     let amount = Double(readLine()!) ?? 0.0
                     accountNos += 1
                     let accountNo = String(accountNos)
@@ -51,7 +54,8 @@ func mainMenu(cus:Customer){
                         rep = 1
                     }
                 }while rep == 1
-            cus.getData()
+                cus.getData()
+            }
             mainMenu(cus: cus)
         case 2:
             banking(cus: cus)
@@ -70,7 +74,7 @@ func mainMenu(cus:Customer){
 func adddetails()
 {
     users += 1
-    let crn = String(users)
+    let cin = String(users)
     
     print("Enter the Full Name")
     let fullname = readLine()!
@@ -102,39 +106,41 @@ func adddetails()
     print("Enter the aadharNumber")
     let aadhar = readLine()!
     
-    customers.append(Customer(crn:crn,fullName:fullname,fatherName:fname,DOB:Dob,occupation:occupation,phoneNumber:phNo,emailId:email,address:address,city:city,panNumber:panNo,aadharNumber:aadhar))
+    customers.append(Customer(cin:cin,fullName:fullname,fatherName:fname,DOB:Dob,occupation:occupation,phoneNumber:phNo,emailId:email,address:address,city:city,panNumber:panNo,aadharNumber:aadhar))
     
     
-    let cus:Customer? = getCustomer(crn: crn)
+    let cus:Customer? = getCustomer(cin: cin)
     if cus != nil{
         var rep:Int
-        repeat{
-            rep = 0
-            print("""
-                \nSelect Account Type\n
-                1.Savings:
-                    Featues: -> Basic Account with minimum Balalce of 0 Rupees.
-                             -> Maximum withdrawl and deposit limit of 100000 Rupees.\n
-                2.Savings Pro Account:
-                    Featues: -> Pro Account with minimum Balalce of 2000 Rupees.
-                             -> Maximum withdrawl and deposit limit of 200000 Rupees.\n
-                3.Salary Account:
-                    Features: -> For Salaried people no minimum balance
-                              -> Maximum withdrawl and deposit limit of 150000 Rupees.\n
-                Reply with 1 or 2 or 3 only.\n
-                """)
-            let account = Int(readLine()!) ?? 0
-            print("Enter Initial Deposit Amount")
-            let amount = Double(readLine()!) ?? 0.0
-            accountNos += 1
-            let accountNo = String(accountNos)
-            if cus!.createAccount(type: account, accountNumber: accountNo, initialamount: amount) == false {
-                rep = 1
-            }
-        }while rep == 1
-        
-        cus!.getData()
-        
+        if cus!.getAccount(type: 1) != nil && cus!.getAccount(type: 2) != nil && cus!.getAccount(type: 3) != nil{
+            print("Customer already created all Account Types")
+        }else{
+            repeat{
+                rep = 0
+                print("""
+                    \nSelect Account Type\n
+                    1.Savings:
+                        Featues: -> Basic Account with minimum Balalce of 0 Rupees.
+                                 -> Maximum withdrawl and deposit limit of 100000 Rupees.\n
+                    2.Savings Pro Account:
+                        Featues: -> Pro Account with minimum Balalce of 2000 Rupees.
+                                 -> Maximum withdrawl and deposit limit of 200000 Rupees.\n
+                    3.Salary Account:
+                        Features: -> For Salaried people no minimum balance
+                                  -> Maximum withdrawl and deposit limit of 150000 Rupees.\n
+                    Reply with 1 or 2 or 3 only.\n
+                    """)
+                let account = Int(readLine()!) ?? 0
+                print("Enter Initial Deposit Amount")
+                let amount = Double(readLine()!) ?? 0.0
+                accountNos += 1
+                let accountNo = String(accountNos)
+                if cus!.createAccount(type: account, accountNumber: accountNo, initialamount: amount) == false {
+                    rep = 1
+                }
+             }while rep == 1
+            cus!.getData()
+        }
         mainMenu(cus: cus!)
     }
     
@@ -143,19 +149,20 @@ func adddetails()
 
 func banking(cus:Customer){
     var more = 1
-    print("\nPlease Select from below Transactions:\n 1:Check Balance\n 2.Deposit \n 3.Withdraw \n 4.Transfer\n 5.Pay Bills\n 6.Bookings\n 7.Exit\n")
+    print("--------------------***************--------------------------")
+    print("\nPlease Select from below Transactions:\n 1:Check Balance\n 2.Deposit Money \n 3.Withdraw Money \n 4.Transfer Money\n 5.Pay Bills\n 6.Bookings\n 7.Exit\n")
     let transaction = Int(readLine()!) ?? 0
     switch transaction{
         case 1:
             if cus.getUserAccounts(){
-                print("Please Select Account to Proceed")
+                print("Please Select Account type to Proceed")
                 let account = Int(readLine()!) ?? 0
                 cus.checkBalance(type:account)
             }
             
         case 2:
             if cus.getUserAccounts(){
-                print("Please Select Account to Proceed")
+                print("Please Select Account type to Proceed")
                 let account = Int(readLine()!) ?? 0
                 print("Enter Amount")
                 let amount = Double(readLine()!) ?? 0.0
@@ -165,7 +172,7 @@ func banking(cus:Customer){
             }
         case 3:
             if cus.getUserAccounts(){
-                print("Please Select Account to Proceed")
+                print("Please Select Account type to Proceed")
                 let account = Int(readLine()!) ?? 0
                 print("Enter Amount")
                 let amount = Double(readLine()!) ?? 0.0
@@ -175,9 +182,9 @@ func banking(cus:Customer){
             }
         case 4:
             if cus.getUserAccounts(){
-                print("Select From Account")
+                print("Select From Account type")
                 let fromAccount = Int(readLine()!) ?? 0
-                print("Select To Account")
+                print("Select To Account type")
                 let toAccount = Int(readLine()!) ?? 0
                 if fromAccount != toAccount{
                     print("Enter Amount")
@@ -193,28 +200,28 @@ func banking(cus:Customer){
         case 5:
             if cus.getUserAccounts(){
                 var rep:Int
-                print("Please Select Account to Proceed")
+                print("Please Select Account type to Proceed")
                 let account = Int(readLine()!) ?? 0
                 repeat{
                     rep = 0
                     if cus.paybills(from:account) == false{
                         rep = 1
                     }
-                    print("\nDo You want to pay more Bills\n 1:Yes\n 2:No\nSelect 1 or 2")
+                    print("\nDo you want to pay more Bills\n 1:Yes\n 2:No\nSelect 1 or 2")
                     rep = Int(readLine()!) ?? 0
                 }while rep == 1
             }
         case 6:
             if cus.getUserAccounts(){
                 var rep:Int
-                print("Please Select Account to Proceed")
+                print("Please Select Account type to Proceed")
                 let account = Int(readLine()!) ?? 0
                 repeat{
                     rep = 0
                     if cus.bookings(from:account) == false{
                         rep = 1
                     }
-                    print("\nDo You want to do Book more\n 1:Yes\n 2:No\nSelect 1 or 2")
+                    print("\nDo you want to do Book more\n 1:Yes\n 2:No\nSelect 1 or 2")
                     rep = Int(readLine()!) ?? 0
                 }while rep == 1
             }
@@ -255,61 +262,61 @@ func editdetails(cus:Customer){
         case 1:
             print("Please Enter Full Name to Update")
             cus.fullName = readLine()!
-            print("\nDo you want to update more reply\n 1.Yes\n 2.No\nReply with 1 or 2")
+            print("\nDo you want to update more reply\n 1.Yes\n 2.No\nSelect 1 or 2 only")
             rep = Int(readLine()!) ?? 0
             
         case 2:
             print("Please Enter Father Name to Update")
             cus.fatherName = readLine()!
-            print("\nDo you want to update more reply\n 1.Yes\n 2.No\nReply with 1 or 2")
+            print("\nDo you want to update more reply\n 1.Yes\n 2.No\nSelect 1 or 2 only")
             rep = Int(readLine()!) ?? 0
             
         case 3:
             print("Please Enter Date of Birth to Update")
             cus.dob = readLine()!
-            print("\nDo you want to update more reply\n 1.Yes\n 2.No\nReply with 1 or 2")
+            print("\nDo you want to update more reply\n 1.Yes\n 2.No\nSelect 1 or 2 only")
             rep = Int(readLine()!) ?? 0
             
         case 4:
             print("Please Enter Occupation to Update")
             cus.occupation = readLine()!
-            print("\nDo you want to update more reply\n 1.Yes\n 2.No\nReply with 1 or 2")
+            print("\nDo you want to update more reply\n 1.Yes\n 2.No\nSelect 1 or 2 only")
             rep = Int(readLine()!) ?? 0
             
         case 5:
             print("Please Enter Phone Number to Update")
             cus.phoneNumber = Int(readLine()!) ?? cus.phoneNumber
-            print("\nDo you want to update more reply\n 1.Yes\n 2.No\nReply with 1 or 2")
+            print("\nDo you want to update more reply\n 1.Yes\n 2.No\nSelect 1 or 2 only")
             rep = Int(readLine()!) ?? 0
             
         case 6:
             print("Please Enter Email Id to Update")
             cus.emailId = readLine()!
-            print("\nDo you want to update more reply\n 1.Yes\n 2.No\nReply with 1 or 2")
+            print("\nDo you want to update more reply\n 1.Yes\n 2.No\nSelect 1 or 2 only")
             rep = Int(readLine()!) ?? 0
             
         case 7:
             print("Please Enter Address to Update")
             cus.address = readLine()!
-            print("\nDo you want to update more reply\n 1.Yes\n 2.No\nReply with 1 or 2")
+            print("\nDo you want to update more reply\n 1.Yes\n 2.No\nSelect 1 or 2 only")
             rep = Int(readLine()!) ?? 0
             
         case 8:
             print("Please Enter City to Update")
             cus.city = readLine()!
-            print("\nDo you want to update more reply\n 1.Yes\n 2.No\nReply with 1 or 2")
+            print("\nDo you want to update more reply\n 1.Yes\n 2.No\nSelect 1 or 2 only")
             rep = Int(readLine()!) ?? 0
             
         case 9:
             print("Please Enter PAN Number to Update")
             cus.panNumber = readLine()!
-            print("\nDo you want to update more reply\n 1.Yes\n 2.No\nReply with 1 or 2")
+            print("\nDo you want to update more reply\n 1.Yes\n 2.No\nSelect 1 or 2 only")
             rep = Int(readLine()!) ?? 0
             
         case 10:
             print("Please Enter Aadhar-Number to Update")
             cus.aadharNumber = readLine()!
-            print("\nDo you want to update more reply\n 1.Yes\n 2.No\nReply with 1 or 2")
+            print("\nDo you want to update more reply\n 1.Yes\n 2.No\nSelect 1 or 2 only")
             rep = Int(readLine()!) ?? 0
 
         default:
@@ -332,8 +339,8 @@ func editdetails(cus:Customer){
 var powerOff:Int
 repeat{
     powerOff = 1
-    print("**************   Helloo User Welcome to Cashing Cows Bank  *************")
-    print("\nChoose from below\n 1:New Customer\n 2:Existing Customer\n 3:Exit Bank Application\nReply with 1 or 2 or 3 only")
+    print("***************--------   Helloo User Welcome to Indian Bank  ---------**************")
+    print("\nChoose anyone from below\n 1:New Customer\n 2:Existing Customer\n 3:Exit Bank Application\nSelect 1 or 2 or 3 only")
     let choice = Int(readLine()!) ?? 0
     if choice == 1{
         print("\n--------------------------------------------------------------------------")
@@ -341,15 +348,15 @@ repeat{
         adddetails()
     }else if choice == 2{
         print("\n--------------------------------------------------------------------------")
-        print("Welcome")
-        print("Enter Your Customer Relationship Number(CRN)")
-        let crn = String(readLine()!)
-        let cus:Customer? = getCustomer(crn: crn)
+        print("                    Welcome               ")
+        print("Enter Your Customer Identification Number(CIN)")
+        let cin = String(readLine()!)
+        let cus:Customer? = getCustomer(cin: cin)
         if cus != nil{
             print("\nHi \(cus!.fullName)")
             mainMenu(cus: cus!)
         }else{
-            print("\nNo Customer Exists with Given Details")
+            print("\nNo Customer Exists with Given CIN")
         }
     }else if choice == 3{
         print("\nGetting Out of Application...\nHave a good day...\n")
